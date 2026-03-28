@@ -26,6 +26,12 @@ html[data-theme="dark"] {
     --switch-border: #ffffff;
 }
 
+/* Seleciona o elemento que contém o tema dark */
+html[data-theme="dark"] .logo {
+    /* Exemplo: sombra clara para destacar no fundo escuro */
+    filter: drop-shadow(0px 3px 20px rgba(44, 44, 44, 0.4));
+}
+
 /* Variáveis de tema para Light Mode */
 html[data-theme="light"] {
     --bg-primary: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #ffffff 100%); 
@@ -49,6 +55,12 @@ html[data-theme="light"] {
     --profile-hover-border: #141414;
 }
 
+/* Seleciona o elemento que contém o tema light */
+html[data-theme="light"] .logo {
+    /* Exemplo: sombra escura suave para profundidade no fundo claro */
+    filter: drop-shadow(0px 6px 15px rgba(0, 0, 0, 0.719));
+}
+
 /* Estilos para quando o mouse passa sobre o perfil no Light Mode */
 html[data-theme="light"] .profile:hover img {
     /* Uma borda escura para contrastar com o fundo claro */
@@ -65,6 +77,9 @@ html[data-theme="light"] .profile:hover .profile-name {
 
 /* Estilos para o corpo da página */
 body {
+    margin: 0; /* Remove todas as margens externas do body */
+    padding: 0; /* Remove todos os espaçamentos internos do body */
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
     /* Fundo gradiente com variáveis de tema */
     background: var(--bg-primary);
     /* Família de fontes moderna e legível */
@@ -84,7 +99,7 @@ body {
 /* Estilos para o elemento main */
 main {
     /* aumentar a margem superior para dar mais espaço em telas pequenas */
-    margin-top: 50px;
+    margin-top: 40px;
     /* Largura total do container */
     width: 100%;
     /* Largura máxima para limitar em telas grandes */
@@ -93,14 +108,17 @@ main {
     padding: 40px 20px;
     /* Alinha o texto ao centro */
     text-align: center;
+    display: flex; /* Layout flexível para organizar o conteúdo dentro do main */
+    flex-direction: column; /* Organiza os elementos em coluna */
+    align-items: center; /* Centraliza os elementos horizontalmente */
 }
 
 .main-container {
     display: flex;
     flex-direction: column; /* Coloca o H1 em cima e os Perfis embaixo */
     justify-content: center; /* Centraliza verticalmente */
-    align-items: center;     /* Centraliza horizontalmente */
-    min-height: 100vh;       /* Faz o container ter no mínimo a altura total da tela */
+    align-items: center; /* Centraliza horizontalmente */
+    min-height: 100vh; /* Faz o container ter no mínimo a altura total da tela */
     width: 100%;
     background: var(--bg-primary); /* Usa o fundo que você já definiu */
 }
@@ -109,6 +127,7 @@ main {
 h1 {
     /* Tamanho da fonte grande para destaque */
     font-size: 3.5rem;
+    margin-top: 30px; /* Margem superior negativa para ajustar o espaçamento em telas menores */
     /* Margem inferior para espaçamento */
     margin-bottom: 60px;
     /* Peso da fonte em negrito */
@@ -116,8 +135,9 @@ h1 {
     /* Espaçamento entre letras para elegância */
     letter-spacing: 2px;
     /* Sombra de texto com cor vermelha sutil */
-    text-shadow: 0 3px 20px rgba(var(--accent-color), 0.3);
-    text-align: center;
+    text-shadow: 10px 3px 20px rgba(var(--accent-color), 0.3);
+    text-align: center; /* Centraliza o texto do título */
+     /* Transição suave para mudanças de estilo ao alternar temas */
 }
 
 /* Estilos para a seção de perfis */
@@ -295,7 +315,13 @@ main {
     align-items: center; /* Centraliza os elementos horizontalmente */
 }
 
-.topbar { 
+.topbar { /* Estilos para a barra superior */
+    width: 100vw; /* Ocupa 100% da largura da janela de visualização */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura além dos 100% */
+    position: fixed; /* Mude para fixed se quiser que ela flutue sobre tudo, ou mantenha sticky */
+    top: 0; /* Posiciona a barra superior no topo da página */
+    left: 0; /* Garante que a barra superior comece do lado esquerdo da página */
+    z-index: 100; /* Garante que a barra superior fique acima de outros elementos */
     display: flex; /* Layout flexível para organizar os elementos da barra superior */
     flex-direction: column; /* Organiza os elementos em coluna para telas menores */
     align-items: flex-start; /* Alinha os elementos à esquerda para telas menores */
@@ -306,14 +332,13 @@ main {
     position: sticky; /* Faz a barra superior ficar fixa no topo da página ao rolar */
     top: 0; /* Posiciona a barra superior no topo da página */
     z-index: 20; /* Garante que a barra superior fique acima de outros elementos */
-    transition: background 0.3s ease, border-color 0.3s ease; /* Transição suave para mudanças de fundo e borda ao alternar temas */
 }
 
-.topbar-row {
+.topbar-row { /* Estilos para a linha dentro da barra superior */
     display: flex; /* Layout flexível para organizar os elementos da barra superior */
     justify-content: space-between; /* Distribui os elementos com espaço entre eles */
     align-items: center; /* Alinha os elementos verticalmente ao centro */
-    padding: 30px 30px; /* Espaçamento interno para a barra superior */
+    padding: 40px 40px; /* Espaçamento interno para a barra superior */
     width: 100%; /* Garante que a barra superior ocupe toda a largura disponível */
     background: var(--bg-tertiary); /* Fundo da barra superior usando a variável de tema */
 }
@@ -476,7 +501,6 @@ html[data-theme="light"] .profile-action-btn:hover {
     box-shadow: 8px 8px 18px var(--nm-shadow-dark), 
                 -8px -8px 18px var(--nm-shadow-light); /* Sombra mais intensa para simular que o botão "subiu", usando as variáveis de sombra do neumorfismo para manter a consistência visual no light mode */
 }
-
 
 footer {
     margin-top: 40px;
