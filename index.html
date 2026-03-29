@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="page-content"> 
+        <header class="topbar">
+            <div class="topbar-row">
+                <img src="assets/netflix-logo.png" alt="Netflix" class="logo">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" aria-label="Alternar modo claro/escuro">
+                    <span class="slider"></span>
+                    <span class="mode-text">Light mode</span>
+                </label>
+            </div>
+        </header>
+
+        <main>
+            <h1>Quem está assistindo?</h1>
+            <section class="profiles" aria-label="Perfis de usuário">
+                <ul>
+                    <li>
+                        <ul>
+                            <li class="profile">
+                                <a href="catalogo-netflix/catalogo.html">
+                                    <figure>
+                                        <img src="./assets/perfil-1.jpg" alt="Imagem de mulher morena de cabelo curto, sorrindo">
+                                        <figcaption>Clara</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="profile">
+                                <a href="catalogo-netflix/catalogo.html">
+                                    <figure>
+                                        <img src="./assets/perfil-2.jpg" alt="Imagem de homem branco de barba no estilo cavaleiro">
+                                        <figcaption>Rodrigo</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="profile">
+                                <a href="catalogo-netflix/catalogo.html">
+                                    <figure>
+                                        <img src="./assets/perfil-3.jpg" alt="Imagem de mulher idosa de cabelo branco, sorrindo">
+                                        <figcaption>Glaucia</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="profile">
+                                <a href="catalogo-netflix/catalogo.html">
+                                    <figure>
+                                        <img src="./assets/perfil-4.jpg" alt="Imagem de homem velho de cabelo branco, sorrindo">
+                                        <figcaption>Robson</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="profile">
+                                <figure>
+                                    <img src="./assets/perfil-5.jpg" alt="Imagem para adicionar novo perfil, com um símbolo de mais">
+                                    <figcaption>Adicionar Perfil</figcaption>
+                                </figure>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="manage-profiles-action" aria-label="Gerenciar Perfis">
+                <button id="manage-profiles" class="profile-action-btn" aria-label="Gerenciar Perfis">
+                    Gerenciar Perfis
+                </button>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 Netflix Brasil. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
