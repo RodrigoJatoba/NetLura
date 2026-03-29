@@ -1,0 +1,754 @@
+/* Reset global para remover margens e paddings padrão dos elementos */
+* {
+    /* Remove todas as margens externas dos elementos */
+    margin: 0;
+    /* Remove todos os espaçamentos internos dos elementos */
+    padding: 0;
+    /* Inclui padding e border no cálculo da largura/altura total */
+    box-sizing: border-box;
+}
+
+/* Variáveis de tema para Dark Mode (padrão) */
+:root,
+html[data-theme="dark"] {
+    --bg-primary: linear-gradient(135deg, #0f0f0f 0%, #222222 50%, #000000 100%);
+    --bg-secondary: rgba(15, 15, 15, 0.95);
+    --bg-tertiary: rgba(13, 13, 13, 0.85);
+    --bg-featured: linear-gradient(135deg, rgba(15, 21, 31, 0.75) 0%, rgba(30, 30, 30, 0.75) 100%);
+    --text-primary: #ffffff; 
+    --text-secondary: rgba(255, 255, 255, 0.85); 
+    --text-tertiary: rgba(255, 255, 255, 0.82);
+    --text-footer: rgba(255, 255, 255, 0.7);
+    --accent-color: #e5090a; 
+    --border-color: rgba(255, 255, 255, 0.05); 
+    --border-featured: rgba(122, 0, 0, 0.377); 
+    --border-topbar: rgba(255, 255, 255, 0.08);
+    --switch-border: #ffffff;
+}
+
+/* Seleciona o elemento que contém o tema dark */
+html[data-theme="dark"] .logo {
+    /* Exemplo: sombra clara para destacar no fundo escuro */
+    filter: drop-shadow(0px 3px 20px rgba(44, 44, 44, 0.4));
+}
+
+/* Variáveis de tema para Light Mode */
+html[data-theme="light"] {
+    --bg-primary: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #ffffff 100%); 
+    --bg-secondary: rgba(240, 240, 240, 0.95);
+    --bg-tertiary: rgba(250, 250, 250, 0.95);
+    --bg-featured: linear-gradient(135deg, rgba(240, 245, 250, 0.95) 0%, rgba(225, 225, 225, 0.95) 100%);
+    --text-primary: #1a1a1a;
+    --text-secondary: rgba(26, 26, 26, 0.85);
+    --text-tertiary: rgba(26, 26, 26, 0.82);
+    --text-footer: rgba(26, 26, 26, 0.7);
+    --accent-color: #d42f31; 
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-featured: rgba(200, 0, 0, 0.2);
+    --border-topbar: rgba(0, 0, 0, 0.08);
+    --switch-border: #9497a1;
+    /* Cores específicas para o Neumorfismo no Light Mode */
+    --nm-shadow-dark: #d1d1d6;
+    --nm-shadow-light: #ffffff;
+    
+    /* Borda de destaque no hover */
+    --profile-hover-border: #141414;
+}
+
+/* Seleciona o elemento que contém o tema light */
+html[data-theme="light"] .logo {
+    /* Exemplo: sombra escura suave para profundidade no fundo claro */
+    filter: drop-shadow(0px 6px 15px rgba(0, 0, 0, 0.719));
+}
+
+/* Estilos para quando o mouse passa sobre o perfil no Light Mode */
+html[data-theme="light"] .profile:hover img {
+    /* Uma borda escura para contrastar com o fundo claro */
+    border-color: #9497a1; 
+    /* Opcional: Adicionar uma leve sombra para dar profundidade no modo claro */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste opcional para o texto do perfil no modo light */
+html[data-theme="light"] .profile:hover .profile-name {
+    color: #000000;
+    font-weight: bold; 
+}
+
+/* Estilos para o corpo da página */
+body {
+    margin: 0; /* Remove todas as margens externas do body */
+    padding: 0; /* Remove todos os espaçamentos internos do body */
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    /* Fundo gradiente com variáveis de tema */
+    background: var(--bg-primary);
+    /* Família de fontes moderna e legível */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Cor do texto com variável de tema */
+    color: var(--text-primary);
+    /* Altura mínima de 100% da viewport para ocupar toda a tela */
+    min-height: 100vh;
+    /* Centraliza o conteúdo vertical e horizontalmente */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    /* Transição suave entre temas */
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Estilos para o elemento main */
+main {
+    /* aumentar a margem superior para dar mais espaço em telas pequenas */
+    margin-top: 40px;
+    /* Largura total do container */
+    width: 100%;
+    /* Largura máxima para limitar em telas grandes */
+    max-width: 1200px;
+    /* Espaçamento interno: 40px vertical, 20px horizontal */
+    padding: 40px 20px;
+    /* Alinha o texto ao centro */
+    text-align: center;
+    display: flex; /* Layout flexível para organizar o conteúdo dentro do main */
+    flex-direction: column; /* Organiza os elementos em coluna */
+    align-items: center; /* Centraliza os elementos horizontalmente */
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column; /* Coloca o H1 em cima e os Perfis embaixo */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    min-height: 100vh; /* Faz o container ter no mínimo a altura total da tela */
+    width: 100%;
+    background: var(--bg-primary); /* Usa o fundo que você já definiu */
+}
+
+/* Estilos para o título h1 */
+h1 {
+    /* Tamanho da fonte grande para destaque */
+    font-size: 3.5rem;
+    margin-top: 30px; /* Margem superior negativa para ajustar o espaçamento em telas menores */
+    /* Margem inferior para espaçamento */
+    margin-bottom: 60px;
+    /* Peso da fonte em negrito */
+    font-weight: 700;
+    /* Espaçamento entre letras para elegância */
+    letter-spacing: 2px;
+    /* Sombra de texto com cor vermelha sutil */
+    text-shadow: 10px 3px 20px rgba(var(--accent-color), 0.3);
+    text-align: center; /* Centraliza o texto do título */
+     /* Transição suave para mudanças de estilo ao alternar temas */
+}
+
+/* Estilos para a seção de perfis */
+.profiles {
+    /* Layout flexível para alinhar os perfis */
+    display: flex;
+    /* Centraliza os perfis horizontalmente */
+    justify-content: center;
+    /* Espaçamento entre os perfis */
+    gap: 40px;
+    /* Permite quebra de linha em telas menores */
+    flex-wrap: wrap; 
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+/* Remove marcadores e espaçamentos padrão de listas em perfis */
+.profiles ul,
+.profiles li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap : 40px;
+}
+
+/* Estilos para cada perfil */
+.profile {
+    /* Cursor de ponteiro para indicar interatividade */
+    cursor: pointer;
+    /* Transição suave para transform e filter */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.profile a {
+    text-decoration: none;
+    color: inherit; 
+    display: block;
+}
+
+/* Estilos para o perfil quando o mouse passa sobre ele */
+.profile:hover {
+    /* Aumenta o tamanho do perfil em 10% */
+    transform: scale(1.1);
+    /* Aumenta o brilho da imagem */
+    filter: brightness(1.2);
+}
+
+/* Estilos para o elemento figure */
+figure {
+    /* Posicionamento relativo para elementos filhos */
+    position: relative;
+    /* Layout flexível em coluna */
+    display: flex;
+    flex-direction: column;
+    /* Alinha itens ao centro */
+    align-items: center;
+    /* Espaçamento entre imagem e legenda */
+    gap: 20px;
+}
+
+/* Estilos para as imagens dentro dos perfis */
+.profile img {
+    /* Largura e altura responsiva usando clamp */
+    width: clamp(100px, 14vw, 160px);
+    height: clamp(100px, 14vw, 160px);
+    /* Bordas arredondadas */
+    border-radius: 8px;
+    /* Ajusta a imagem para cobrir o espaço sem distorcer */
+    object-fit: cover;
+    /* Borda transparente inicialmente */
+    border: 3px solid transparent;
+    /* Transição suave para a cor da borda */
+    transition: border-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+    /* Sombra para dar profundidade */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.profiles {
+    gap: clamp(18px, 4vw, 40px);
+}
+
+/* Estilos para a imagem quando o mouse passa sobre o perfil */
+.profile:hover img {
+    /* Muda a cor da borda usando variável de tema */
+    border-color: #ffffff;
+}
+
+/* Estilos para a legenda da imagem */
+figcaption {
+    /* Tamanho da fonte da legenda */
+    font-size: 1.5rem;
+    /* Peso da fonte médio */
+    font-weight: 500;
+    /* Cor da legenda com variável de tema */
+    color: var(--text-primary);
+    /* Transição suave para a cor */
+    transition: color 0.3s ease;
+}
+
+/* Estilos para a legenda quando o mouse passa sobre o perfil */
+.profile:hover figcaption {
+    /* Mantém a cor do tema na legenda */
+    color: var(--text-primary);
+}
+
+/* Media query para telas menores que 768px */
+@media (max-width: 768px) {
+   
+    /* Ajusta o tamanho do título para telas menores */
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+
+    /* Reduz o espaçamento entre perfis */
+    .profiles {
+        gap: 30px;
+    }
+
+    /* Reduz o tamanho das imagens */
+    .profile img {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Reduz o tamanho da fonte da legenda */
+    figcaption {
+        font-size: 1.2rem;
+    }
+}
+
+/* Media query para telas menores que 480px */
+@media (max-width: 480px) {
+
+    /* Ajusta ainda mais o tamanho do título */
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    /* Reduz mais o espaçamento entre perfis */
+    .profiles {
+        gap: 20px;
+    }
+
+    /* Reduz ainda mais o tamanho das imagens */
+    .profile img {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Reduz ainda mais o tamanho da fonte da legenda */
+    figcaption {
+        font-size: 1rem;
+    }
+}
+
+.page-content {
+    margin-left: 0; /* Remove a margem lateral para telas menores */
+    width: 100%; /* Garante que o conteúdo ocupe toda a largura disponível */
+    padding: 0 0px; /* Mantém o padding horizontal para evitar que o conteúdo encoste nas bordas da tela */
+    display: flex; /* Layout flexível para organizar o conteúdo */
+    flex-direction: column; /* Organiza os elementos em coluna */
+    align-items: center; /* Centraliza os elementos horizontalmente */
+}
+
+main {
+    width: 100%; /* Garante que o main ocupe toda a largura disponível */
+    max-width: 1200px; /* Limita a largura máxima para evitar que o conteúdo fique muito esticado em telas grandes */
+    display: flex; /* Layout flexível para organizar o conteúdo dentro do main */
+    flex-direction: column; /* Organiza os elementos em coluna */
+    align-items: center; /* Centraliza os elementos horizontalmente */
+}
+
+.topbar { /* Estilos para a barra superior */
+    width: 100vw; /* Ocupa 100% da largura da janela de visualização */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura além dos 100% */
+    position: fixed; /* Mude para fixed se quiser que ela flutue sobre tudo, ou mantenha sticky */
+    top: 0; /* Posiciona a barra superior no topo da página */
+    left: 0; /* Garante que a barra superior comece do lado esquerdo da página */
+    z-index: 100; /* Garante que a barra superior fique acima de outros elementos */
+    display: flex; /* Layout flexível para organizar os elementos da barra superior */
+    flex-direction: column; /* Organiza os elementos em coluna para telas menores */
+    align-items: flex-start; /* Alinha os elementos à esquerda para telas menores */
+    gap: 10px; /* Espaçamento entre os elementos da barra superior para telas menores */
+    padding: 25px 30px; /* Espaçamento interno para a barra superior, ajustado para telas menores */
+    background: var(--bg-tertiary); /* Fundo da barra superior usando a variável de tema */
+    border-bottom: 1px solid var(--border-topbar); /* Borda inferior usando a variável de tema para criar um leve destaque */
+    position: sticky; /* Faz a barra superior ficar fixa no topo da página ao rolar */
+    top: 0; /* Posiciona a barra superior no topo da página */
+    z-index: 20; /* Garante que a barra superior fique acima de outros elementos */
+}
+
+.topbar-row { /* Estilos para a linha dentro da barra superior */
+    display: flex; /* Layout flexível para organizar os elementos da barra superior */
+    justify-content: space-between; /* Distribui os elementos com espaço entre eles */
+    align-items: center; /* Alinha os elementos verticalmente ao centro */
+    padding: 40px 40px; /* Espaçamento interno para a barra superior */
+    width: 100%; /* Garante que a barra superior ocupe toda a largura disponível */
+    background: var(--bg-tertiary); /* Fundo da barra superior usando a variável de tema */
+}
+
+.logo {
+    height: 100px; /* Tamanho da logo tipo Netflix */
+    width: auto; /* Mantém a proporção da imagem */
+}   
+
+/* --- ESTILO DO BOTÃO NEUMÓRFICO --- */
+.theme-switch {
+    position: relative; 
+    width: 155px;   
+    height: 46px; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px; 
+    border-radius: 30px; 
+    border: 2px solid var(--switch-border);
+    background: var(--bg-secondary);
+    box-shadow: 8px 8px 16px rgba(0,0,0,0.2),
+                -8px -8px 16px rgba(255,255,255,0.08);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.theme-switch:hover {
+    box-shadow: 10px 10px 18px rgba(0,0,0,0.24),
+                -10px -10px 18px rgba(255,255,255,0.1);
+    border: 2px solid var(--switch-border);
+}
+
+.theme-switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.slider {
+    position: absolute; /* Posiciona o slider dentro do switch */
+    top: 1px; /* Posiciona o slider 1px abaixo do topo do switch para centralizá-lo verticalmente */
+    left: 2px; /* Posiciona o slider 2px à direita do lado esquerdo do switch para criar um pequeno espaço */
+    height: 40px; /* Define a altura do slider para ser um pouco menor que a altura do switch, criando um efeito de encaixe */
+    width: 40px; /* Define a largura do slider para ser um círculo perfeito */
+    border-radius: 50%; /* Torna o slider um círculo */
+    background: var(--bg-primary); /* Fundo do slider usando a variável de tema para garantir contraste adequado */
+    background-image: url('assets/sol-logo.png'); /* Imagem do sol para o modo claro */
+    background-size: 100%; /* Ajusta o tamanho da imagem para cobrir todo o slider */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-position: center; /* Centraliza a imagem dentro do slider */
+    transition: transform 0.4s ease, background-color 0.4s ease, background-image 0.4s ease; /* Transições suaves para o movimento do slider e mudanças de estilo */
+    box-shadow: 4px 4px 8px rgba(248, 247, 247, 0.15),
+                -2px -2px 6px #9497a1; /* Sombra para dar profundidade ao slider, usando uma sombra clara e uma sombra escura para criar um efeito de relevo */
+    z-index: 2; /* Garante que o slider fique acima do texto do modo */
+}
+
+input:checked + .slider {
+    transform: translateX(109px); /* Ajusta a distância de movimento do slider para telas menores */
+    background-image: url('assets/lua-logo2.png');
+    background-color: #000000;
+}
+
+.mode-text {
+    z-index: 1; /* Garante que o texto fique atrás do slider */
+    font-size: 0.85rem; /* Tamanho da fonte para o texto do modo */
+    font-weight: 600; /* Peso da fonte para destaque */
+    color: var(--text-primary); /* Cor do texto usando a variável de tema para garantir contraste adequado */
+    text-transform: uppercase;  /* Transforma o texto em maiúsculas para um visual mais impactante */
+    letter-spacing: 0.8px; /* Espaçamento entre letras para melhor legibilidade */
+    margin-left: 40px; /* Margem para posicionar o texto do modo à direita do slider */
+    transition: margin-left 0.4s ease; /* Transição suave para o movimento do texto quando o slider é toggled */
+}
+
+input:checked ~ .mode-text {
+    margin-left: -40px;
+}
+
+.logo {
+    height: 100px; /* Tamanho da logo tipo Netflix */
+    width: auto;
+}
+
+/* Estilos para o botão de toggle de tema */
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--accent-color);
+    color: var(--bg-tertiary);
+    transform: scale(1.1);
+}
+
+/* Comportamento específico do ícone no hover baseado no tema */
+html[data-theme="dark"] .theme-toggle:hover .icon svg {
+    color: #000000; /* Preto no dark mode */
+}
+
+html[data-theme="light"] .theme-toggle:hover .icon svg {
+    color: #ffffff; /* Branco no light mode */
+}
+
+.manage-profiles-action {
+    margin-top: 70px; /* Aumenta a margem superior para dar mais espaço entre os perfis e o botão */
+    width: 100%; /* Garante que o botão ocupe toda a largura disponível */
+    display: flex; /* Layout flexível para organizar o botão */
+    justify-content: center; /* Centraliza o botão horizontalmente */
+}
+
+html[data-theme="dark"] .profile-action-btn {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.35)); /* Fundo escuro com transparência para o efeito de vidro fosco */
+    color: var(--text-primary); /* Cor do texto usando a variável de tema para garantir contraste adequado */
+    border: 2px solid #ffffff; /* Borda branca para destacar o botão no light mode */
+    border-radius: 12px; /* Bordas arredondadas para um visual mais moderno */
+    padding: 14px 32px; /* Espaçamento interno para um botão mais clicável */
+    font-size: 1.2rem; /* Tamanho da fonte para destaque */
+    font-weight: 700; /* Peso da fonte em negrito para chamar atenção */
+    cursor: pointer; /* Cursor de ponteiro para indicar que é clicável */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease; /* Transições suaves para transformações e mudanças de estilo */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.50); /* Sombra para dar profundidade */
+    text-transform: uppercase; /* Texto em maiúsculas para um visual mais impactante */
+}
+
+html[data-theme="dark"] .profile-action-btn:hover {
+    background: linear-gradient(135deg, #1d1d1d 0%, #383838 50%, #757575 100%); /* Fundo mais escuro e texturizado para o hover */
+    transform: translateY(-2px); /* Leve elevação para dar feedback visual de hover */
+    border: 2px solid var(--accent-color);  /* Borda vermelha para destacar o botão */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); /* Sombra mais intensa para simular que o botão "subiu" */
+}
+
+html[data-theme="light"] .profile-action-btn {
+    background: linear-gradient(135deg, #9497a1, rgba(199, 199, 199, 0.418)); /* Fundo escuro com transparência para o efeito de vidro fosco, mesmo no light mode para manter a consistência visual */
+    color: var(--text-primary); /* Cor do texto usando a variável de tema para garantir contraste adequado */
+    border: 2px solid #ffffff; /* Borda branca para destacar o botão no light mode */  
+    border-radius: 12px; /* Bordas arredondadas para um visual mais moderno */
+    padding: 14px 32px; /* Espaçamento interno para um botão mais clicável */
+    font-size: 1.2rem; /* Tamanho da fonte para destaque */
+    font-weight: 700; /* Peso da fonte em negrito para chamar atenção */
+    cursor: pointer; /* Cursor de ponteiro para indicar que é clicável */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease; /* Transições suaves para transformações e mudanças de estilo */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.40); /* Sombra para dar profundidade, mesmo no light mode para manter a consistência visual */
+    text-transform: uppercase; /* Texto em maiúsculas para um visual mais impactante */
+}
+
+html[data-theme="light"] .profile-action-btn:hover {
+    background: var(--bg-tertiary); /* Mantém o fundo claro para o hover, mas com um leve destaque para indicar interatividade */
+    transform: translateY(-2px); /* Leve elevação para dar feedback visual de hover */
+    border: 2px solid var(--accent-color); /* Borda vermelha para destacar o botão no hover, mesmo no light mode para manter a consistência visual */
+    box-shadow: 8px 8px 18px var(--nm-shadow-dark), 
+                -8px -8px 18px var(--nm-shadow-light); /* Sombra mais intensa para simular que o botão "subiu", usando as variáveis de sombra do neumorfismo para manter a consistência visual no light mode */
+}
+
+footer {
+    margin-top: 40px;
+    padding: 18px 30px;
+    text-align: center;
+    color: var(--text-footer);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+    .page-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .topbar {
+        padding: 18px 20px;
+    }
+
+    .profile img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .featured h2 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (min-width: 900px) {
+    .profiles > ul > li > ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        flex-wrap: nowrap;
+    }
+
+    .profiles > ul > li {
+        width: 100%;
+    }
+
+    .profile {
+        max-width: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-content {
+        margin-left: 0; /* Remove a margem lateral para telas menores */
+        width: 100%; /* Garante que o conteúdo ocupe toda a largura disponível */
+        padding: 0 0px; /* Mantém o padding horizontal para evitar que o conteúdo encoste nas bordas da tela */
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 20px; /* Ajusta o padding para telas menores */
+    }
+
+    .topbar-row {
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        height: 90px;
+    }
+
+    .theme-switch {
+        width: 80px;
+        height: 44px;
+        border: 2px solid var(--switch-border);
+    }
+
+    .theme-switch .slider {
+        height: 39px;
+        width: 39px;
+    }
+
+    input:checked + .slider {
+        transform: translateX(34px);
+    }
+
+    .mode-text {
+        font-size: 0rem;
+        margin-left: 30px;
+    }
+
+    input:checked ~ .mode-text {
+        margin-left: -30px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .page-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 0 0px;
+    }
+
+    .topbar {
+        flex-direction: column; /* Organiza os elementos em coluna para telas menores */
+        align-items: flex-end; /* Alinha os elementos à direita para telas menores, mantendo a logo à esquerda e o switch à direita */
+        gap: 10px; /* Espaçamento entre os elementos da barra superior para telas menores */
+        padding: 14px 14px; /* Ajusta o padding para telas menores */
+        width: 100%; /* Garante que a barra superior ocupe toda a largura disponível */
+    }
+
+    .topbar-row {
+        width: 100%; /* Garante que a barra superior ocupe toda a largura disponível */
+        justify-content: space-between; /* Distribui os elementos com espaço entre eles */
+        align-items: center; /* Alinha os elementos verticalmente ao centro */
+        padding: 20px 20px; /* Ajusta o padding para telas menores */
+    }
+
+    .logo {
+        height: 65px;
+    }
+
+    .theme-switch {
+        width: 65px;
+        height: 36px;
+    }
+
+    .theme-switch .slider {
+        height: 31px;
+        width: 31px;
+    }
+
+    input:checked + .slider {
+        transform: translateX(26px); /* Ajusta a distância de movimento do slider para telas menores */
+    }
+
+    .mode-text {
+        font-size: 0rem; /* Reduz o tamanho da fonte para o texto do modo em telas menores */
+        margin-left: 25px; /* Ajusta a margem para posicionar o texto do modo à direita do slider em telas menores */
+    }
+
+    input:checked ~ .mode-text {
+        margin-left: -25px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    .profiles {
+        gap: 18px;
+    }
+
+    .profile img {
+        width: 110px;
+        height: 110px;
+    }
+
+    figcaption {
+        font-size: 0.95rem;
+    }
+
+    .featured {
+        margin-top: 24px;
+        padding: 18px;
+    }
+
+    .featured h2 {
+        font-size: 1.4rem;
+    }
+
+    .featured p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .topbar-row {
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        height: 40px;
+    }
+
+    .theme-switch {
+        width: 90px;
+        height: 32px;
+    }
+
+    .theme-switch .slider {
+        height: 24px;
+        width: 24px;
+    }
+
+    input:checked + .slider {
+        transform: translateX(58px);
+    }
+
+    .mode-text {
+        font-size: 0.65rem;
+        margin-left: 20px;
+    }
+
+    input:checked ~ .mode-text {
+        margin-left: -20px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .profile img {
+        width: 95px;
+        height: 95px;
+    }
+
+    .figcaption {
+        font-size: 0.85rem;
+    }
+
+    .featured {
+        padding: 14px;
+    }
+
+    .featured h2 {
+        font-size: 1.2rem;
+    }
+
+    .featured p {
+        font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+        font-size: 1rem;
+        padding: 5px 8px;
+    }
+
+    .theme-toggle .icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}
